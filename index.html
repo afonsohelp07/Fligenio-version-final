@@ -481,6 +481,9 @@ body { background: var(--n950); text-rendering: optimizeLegibility; }
 .f label {
   display: block; font-size: 10px; font-weight: 700; color: var(--sl4);
   text-transform: uppercase; letter-spacing: .7px; margin-bottom: 5px;
+  line-height: 1.45;
+  padding-top: 2px;
+  overflow: visible;
 }
 .f input, .f select, .f textarea {
   width: 100%; background: rgba(0,0,0,.3);
@@ -577,9 +580,12 @@ tbody tr.retard:hover td { background: rgba(220,38,38,.09); }
 /* ══════════════════════════════════════════════════════
    FILTRES
 ══════════════════════════════════════════════════════ */
-.fb { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 15px; }
+/* flex-start: évite que les labels au-dessus des champs soient rognés en haut (cf. barres Pesquisar / De / Ordenar) */
+.fb { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 15px; padding-top: 2px; }
 .fb .f { margin-bottom: 0; flex: 1; min-width: 100px; }
 .fb .f input, .fb .f select { padding: 8px 10px; font-size: 12px; }
+/* Aligne le bouton d’action avec la rangée des champs (hauteur label + marge) */
+.fb > .btn { margin-top: 21px; align-self: flex-start; }
 
 /* ══════════════════════════════════════════════════════
    LIGNES DE DOCUMENT (table éditable)
@@ -976,6 +982,7 @@ body.mobile-nav-open .sb-backdrop {
     gap: 10px;
   }
   .fb .f { flex: none; width: 100%; min-width: 0; margin-bottom: 0; }
+  .fb > .btn { margin-top: 0; }
   .fb .btn { width: 100%; justify-content: center; }
   .fr { flex-direction: column; gap: 0; }
   .tw { margin-left: -4px; margin-right: -4px; }
