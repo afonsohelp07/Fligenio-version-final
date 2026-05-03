@@ -479,10 +479,11 @@ body { background: var(--n950); text-rendering: optimizeLegibility; }
 ══════════════════════════════════════════════════════ */
 .f { margin-bottom: 14px; }
 .f label {
-  display: block; font-size: 10px; font-weight: 700; color: var(--sl4);
-  text-transform: uppercase; letter-spacing: .7px; margin-bottom: 5px;
-  line-height: 1.45;
-  padding-top: 2px;
+  display: block; font-size: 11px; font-weight: 700; color: var(--sl4);
+  text-transform: uppercase; letter-spacing: 0.55px; margin-bottom: 6px;
+  line-height: 1.5;
+  padding-top: 4px;
+  padding-bottom: 1px;
   overflow: visible;
 }
 .f input, .f select, .f textarea {
@@ -581,11 +582,11 @@ tbody tr.retard:hover td { background: rgba(220,38,38,.09); }
    FILTRES
 ══════════════════════════════════════════════════════ */
 /* flex-start: évite que les labels au-dessus des champs soient rognés en haut (cf. barres Pesquisar / De / Ordenar) */
-.fb { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 15px; padding-top: 2px; }
-.fb .f { margin-bottom: 0; flex: 1; min-width: 100px; }
+.fb { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 15px; padding-top: 8px; }
+.fb .f { margin-bottom: 0; flex: 1; min-width: 100px; overflow: visible; }
 .fb .f input, .fb .f select { padding: 8px 10px; font-size: 12px; }
-/* Aligne le bouton d’action avec la rangée des champs (hauteur label + marge) */
-.fb > .btn { margin-top: 21px; align-self: flex-start; }
+/* Hauteur ≈ padding-top + ligne du label + marge sous le label */
+.fb > .btn { margin-top: 28px; align-self: flex-start; }
 
 /* ══════════════════════════════════════════════════════
    LIGNES DE DOCUMENT (table éditable)
@@ -1223,7 +1224,7 @@ html[data-theme="dark"] .scv {
   color: #faf6ec;
 }
 html[data-theme="dark"] .f label {
-  color: #b8ccdf;
+  color: #d8e5f2;
   font-weight: 800;
 }
 html[data-theme="dark"] .f input,
@@ -1532,8 +1533,8 @@ html:not([data-theme="dark"]) .scs {
 html:not([data-theme="dark"]) .scv { color: var(--n700); }
 
 html:not([data-theme="dark"]) .f label {
-  color: #334155;
-  font-weight: 700;
+  color: #1e293b;
+  font-weight: 800;
 }
 html:not([data-theme="dark"]) .f input,
 html:not([data-theme="dark"]) .f select,
@@ -2071,7 +2072,7 @@ html:not([data-theme="dark"]) :focus-visible {
 
   <!-- ═══ PESQUISA GLOBAL (todos os documentos) ═══ -->
   <div class="pg" id="pgPesq">
-    <p style="font-size:11.5px;color:var(--sl4);margin:-6px 0 14px;max-width:920px">Pesquise em todos os tipos de documento (orçamentos, proformas, faturas, recibos). Use texto, datas, tipo, estados e ordenação; depois clique em <strong>Pesquisar</strong>. O botão <strong>Pesquisar</strong> da barra superior continua a abrir a mesma pesquisa em janela.</p>
+    <p style="font-size:11.5px;color:var(--sl4);margin:0 0 14px;max-width:920px">Pesquise em todos os tipos de documento (orçamentos, proformas, faturas, recibos). Use texto, datas, tipo, estados e ordenação; depois clique em <strong>Pesquisar</strong>. O botão <strong>Pesquisar</strong> da barra superior continua a abrir a mesma pesquisa em janela.</p>
     <div class="fb" style="flex-wrap:wrap">
       <div class="f"><label>Texto</label><input type="text" id="pg-q" placeholder="Número, cliente, NIF, email..." onkeydown="if(event.key==='Enter'){event.preventDefault();renderPesquisaPage();}"></div>
       <div class="f md"><label>Tipo</label><select id="pg-tipo" onchange="renderPesquisaPage()"><option value="">Todos</option><option value="Orçamento">Orçamento</option><option value="Proforma">Proforma</option><option value="Fatura">Fatura</option><option value="Recibo">Recibo</option></select></div>
@@ -2082,8 +2083,8 @@ html:not([data-theme="dark"]) :focus-visible {
       <div class="f md"><label>Até</label><input type="date" id="pg-d2" onchange="renderPesquisaPage()"></div>
       <div class="f md"><label>Ordenar por</label><select id="pg-sort" onchange="renderPesquisaPage()"><option value="recent" selected>Mais recentes</option><option value="numero">Número</option><option value="data">Data doc.</option><option value="cliente">Cliente</option><option value="total">Total</option><option value="estado">Estado / Pgto</option><option value="validade">Vencimento</option></select></div>
       <div class="f nw"><label>Ordem</label><select id="pg-dir" onchange="renderPesquisaPage()"><option value="desc" selected>Decrescente</option><option value="asc">Crescente</option></select></div>
-      <div class="f nw" style="align-self:flex-end"><label style="display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap"><input type="checkbox" id="pg-incl-anul" onchange="renderPesquisaPage()"> Incluir anulados</label></div>
-      <div class="f" style="align-self:flex-end;display:flex;gap:8px;flex-wrap:wrap">
+      <div class="f nw" style="align-self:flex-start"><label style="display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap"><input type="checkbox" id="pg-incl-anul" onchange="renderPesquisaPage()"> Incluir anulados</label></div>
+      <div class="f" style="align-self:flex-start;display:flex;gap:8px;flex-wrap:wrap">
         <button type="button" class="btn bp bsm" onclick="renderPesquisaPage()">🔍 Pesquisar</button>
         <button type="button" class="btn bg bsm" onclick="clearPesquisaPageFiltros()">Limpar filtros</button>
       </div>
