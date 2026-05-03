@@ -1949,7 +1949,8 @@ html:not([data-theme="dark"]) h3 { color: var(--n700); }
   <div class="pg" id="pgCfg">
     <div class="sg2" style="gap:16px">
       <!-- Identidade da Empresa -->
-      <div class="card" style="grid-column:1/-1"><div class="ch"><div class="ct">🏢 Identidade da Empresa</div></div><div class="cb">
+      <div class="card" style="grid-column:1/-1"><div class="ch"><div class="ct">🏢 Identidade da Empresa</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn bg bsm" type="button" onclick="loadCfgContab()" title="Recarregar a partir da folha Config">🔄 Atualizar</button></div></div><div class="cb">
+        <div class="infobox" style="margin-bottom:12px;font-size:11px;line-height:1.5">Estes dados vêm da folha <strong>Config</strong> (coluna B: identidade, morada, contactos; linhas extra 61–64 para capital / matrícula / conservatória / sigla). Edite aqui e use <strong>Guardar Perfil ERP</strong>, ou edite a folha e clique em <strong>Atualizar</strong>.</div>
         <div class="fr" style="display:flex;gap:14px;flex-wrap:wrap">
           <div class="f" style="flex:2;min-width:220px">
             <label>Nome da Empresa / Razão Social</label>
@@ -3000,7 +3001,11 @@ async function applyCfgEmpresa() {
     applyEmpresaToUI(nome, sigla, ls('nhalabene_empresa_logo') || '');
     toast(r.msg || 'Perfil da empresa actualizado com sucesso!', 'ok', 'Empresa');
   } else {
-    toast(r?.error || 'Erro ao guardar perfil da empresa.', 'err', 'Empresa');
+    let msg = r?.error || 'Erro ao guardar perfil da empresa.';
+    if (/Action inconnue|saveCompanyProfile/i.test(msg)) {
+      msg += ' Publique de novo o Web App no Apps Script (Implantar) com o Code.gs que inclui a acção saveCompanyProfile.';
+    }
+    toast(msg, 'err', 'Empresa');
   }
 }
 async function resetCfgEmpresa() {
