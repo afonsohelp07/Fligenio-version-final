@@ -4,19 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Fligenio · ERP PME</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#E8EEF6">
+<script>
+(function(){try{if(localStorage.getItem('nhalabene_ui_theme')==='dark')document.documentElement.setAttribute('data-theme','dark');else document.documentElement.removeAttribute('data-theme');}catch(e){}})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════════════════
-   ERP SISTEMA v3.1 · DESIGN SYSTEM
-   Thème: Navy professionnel + or (PME PT)
+   ERP v3 — Design aligné « Transfer NL / Staff reception »
+   Clair par défaut (contraste élevé) · Sombre = thème classique
 ══════════════════════════════════════════════════════ */
 :root {
-  /* Palette principale */
+  /* Palette — navy / or type Premium Hotels + bleu lecture */
   --n950:#040c1e; --n900:#07112a; --n800:#0c1c42;
-  --n700:#112358; --n600:#1a3470; --n500:#234798;
-  --b400:#3b82f6; --b300:#60a5fa; --b200:#93c5fd; --b100:#dbeafe;
-  /* Accentuation or — identité PME */
-  --g:#b8943a; --gl:#d4ad55; --gll:#f0cc7a; --gs:rgba(184,148,58,.12);
+  --n700:#0D2137; --n600:#112844; --n500:#1B4F72;
+  --b400:#1B4F72; --b300:#2563a8; --b200:#6b93c4; --b100:#dbeafe;
+  /* Or — même tonalité que Staff_reception */
+  --g:#C9A84C; --gl:#E8CC80; --gll:#f0dfa0; --gs:rgba(201,168,76,.12);
   /* Sémantique */
   --green:#16a34a; --greenl:#22c55e; --greenll:#86efac;
   --red:#dc2626; --redl:#ef4444; --redll:#fca5a5;
@@ -35,8 +40,8 @@
   --shd: 0 20px 60px rgba(0,0,0,.6);
   --shd-sm: 0 4px 20px rgba(0,0,0,.35);
   --r: 12px; --rs: 8px; --rxs: 5px;
-  --fd: 'Syne', sans-serif;
-  --fb: 'Plus Jakarta Sans', sans-serif;
+  --fd: 'Cormorant Garamond', 'Times New Roman', serif;
+  --fb: 'DM Sans', system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -966,12 +971,412 @@ body.mobile-nav-open .sb-backdrop {
   }
 }
 .btn, .ni, .ltab, .lbtn, .blogt { -webkit-tap-highlight-color: transparent; }
+
+/* ══════════════════════════════════════════════════════
+   Thème clair/sombre (Staff reception) + lisibilité renforcée
+══════════════════════════════════════════════════════ */
+.theme-corner-login {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  left: max(16px, env(safe-area-inset-left));
+  z-index: 12;
+}
+.theme-seg {
+  display: inline-flex;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+html[data-theme="dark"] .topbar .theme-seg {
+  background: rgba(0,0,0,.22);
+  border-color: rgba(255,255,255,.14);
+}
+.theme-btn {
+  width: 36px;
+  height: 32px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .2s, background .2s, box-shadow .2s;
+  color: rgba(255,255,255,.68);
+}
+.theme-corner-login .theme-btn { color: rgba(255,255,255,.75); }
+.theme-btn:hover { color: var(--gl); }
+.theme-btn.on {
+  background: rgba(201,168,76,.22);
+  color: var(--gl);
+  box-shadow: inset 0 0 0 1px rgba(201,168,76,.35);
+}
+.topbar-theme-inline {
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+/* —— Mode clair (défaut : pas d’attribut data-theme) —— */
+html:not([data-theme="dark"]) {
+  color-scheme: light;
+}
+html:not([data-theme="dark"]) body {
+  background: #E8EEF6;
+  color: #111827;
+}
+html:not([data-theme="dark"]) .atmo,
+html:not([data-theme="dark"]) .grid-bg {
+  opacity: 0;
+  pointer-events: none;
+}
+html:not([data-theme="dark"]) .gold-line {
+  background: linear-gradient(90deg, transparent 0%, var(--g) 28%, var(--gl) 50%, var(--g) 72%, transparent 100%);
+}
+html:not([data-theme="dark"]) #loginWrap {
+  background: linear-gradient(135deg, #060e1c 0%, var(--n700) 55%, var(--n500) 100%);
+}
+html:not([data-theme="dark"]) .lcard {
+  background: #fff;
+  border: 1px solid #D0DCE8;
+  box-shadow: 0 6px 24px rgba(13,33,55,.14);
+  color: #111827;
+}
+html:not([data-theme="dark"]) .ltitle { color: var(--n700); }
+html:not([data-theme="dark"]) .lsub,
+html:not([data-theme="dark"]) .lnote { color: #475569; }
+html:not([data-theme="dark"]) .lver { color: #5b6472; }
+html:not([data-theme="dark"]) .ltab { color: #475569; }
+html:not([data-theme="dark"]) .ltab.on {
+  background: var(--n700);
+  color: #fff;
+}
+html:not([data-theme="dark"]) .lf label {
+  color: #334155;
+  font-weight: 700;
+}
+html:not([data-theme="dark"]) .lf input {
+  background: #fff;
+  color: #111827;
+  border-color: #c5d4e3;
+}
+html:not([data-theme="dark"]) .lf input:focus {
+  border-color: var(--n500);
+  box-shadow: 0 0 0 3px rgba(13,33,55,.1);
+}
+html:not([data-theme="dark"]) .lf input::placeholder { color: #64748b; opacity: .85; }
+html:not([data-theme="dark"]) .pind {
+  background: #fff;
+  color: #111827;
+  border-color: #c5d4e3;
+}
+html:not([data-theme="dark"]) .lbtn {
+  background: linear-gradient(135deg, var(--n700), var(--n500));
+  box-shadow: 0 4px 16px rgba(13,33,55,.22);
+}
+html:not([data-theme="dark"]) .lerr {
+  color: #b91c1c;
+  background: #FEF2F2;
+  border-color: #FECACA;
+}
+html:not([data-theme="dark"]) #l-api-url {
+  background: #fff !important;
+  color: #111827 !important;
+  border-color: #c5d4e3 !important;
+}
+html:not([data-theme="dark"]) .l-url-box {
+  background: rgba(201,168,76,.1) !important;
+  border-color: rgba(201,168,76,.35) !important;
+}
+html:not([data-theme="dark"]) .l-url-title {
+  color: var(--n700) !important;
+}
+html:not([data-theme="dark"]) .l-url-hint {
+  color: #475569 !important;
+}
+html:not([data-theme="dark"]) .l-url-testbtn {
+  background: linear-gradient(135deg, var(--n700), var(--n500)) !important;
+  color: #fff !important;
+}
+
+html:not([data-theme="dark"]) .sb {
+  background: linear-gradient(180deg, var(--n700) 0%, var(--n600) 100%);
+  border-right-color: rgba(201,168,76,.22);
+}
+html:not([data-theme="dark"]) .nsl {
+  color: rgba(255,255,255,.78);
+  font-weight: 700;
+}
+html:not([data-theme="dark"]) .ni { color: rgba(255,255,255,.9); }
+html:not([data-theme="dark"]) .ni:hover {
+  background: rgba(255,255,255,.08);
+  color: #fff;
+}
+html:not([data-theme="dark"]) .ni.on {
+  background: rgba(201,168,76,.14);
+  color: var(--gl);
+  border-right: 2px solid var(--g);
+}
+html:not([data-theme="dark"]) .ni.adm.on {
+  background: rgba(201,168,76,.18);
+  color: var(--gl);
+  border-right-color: var(--g);
+}
+html:not([data-theme="dark"]) .sbname { color: #fff; }
+html:not([data-theme="dark"]) .sbver2 { color: var(--gl); }
+html:not([data-theme="dark"]) .sbico {
+  background: rgba(201,168,76,.15);
+  border: 1px solid rgba(201,168,76,.28);
+  box-shadow: none;
+  color: var(--gl);
+}
+html:not([data-theme="dark"]) .urow { background: rgba(255,255,255,.08); }
+html:not([data-theme="dark"]) .uname { color: #fff; }
+html:not([data-theme="dark"]) .ulvl.Admin { color: #e9d5ff; }
+html:not([data-theme="dark"]) .ulvl.Gestor { color: #bfdbfe; }
+html:not([data-theme="dark"]) .ulvl.Operador { color: #bbf7d0; }
+html:not([data-theme="dark"]) .ulvl.Visualizador { color: #e2e8f0; }
+html:not([data-theme="dark"]) .blogt { color: rgba(255,255,255,.8); }
+html:not([data-theme="dark"]) .stimer { color: rgba(255,255,255,.72); }
+
+html:not([data-theme="dark"]) .topbar {
+  background: var(--n700);
+  border-bottom: 1px solid rgba(201,168,76,.28);
+  backdrop-filter: none;
+}
+html:not([data-theme="dark"]) .tbt { color: #fff; }
+html:not([data-theme="dark"]) .tbbr { color: rgba(255,255,255,.8); }
+html:not([data-theme="dark"]) .nav-toggle {
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.25);
+  color: #fff;
+}
+html:not([data-theme="dark"]) .nav-toggle .hb > span { background: #f1f5f9; }
+html:not([data-theme="dark"]) .apistat {
+  color: rgba(255,255,255,.9);
+  border-color: rgba(255,255,255,.22);
+}
+
+html:not([data-theme="dark"]) .content { background: #E8EEF6; }
+
+html:not([data-theme="dark"]) .card,
+html:not([data-theme="dark"]) .sc {
+  background: #fff;
+  border-color: #D0DCE8;
+  backdrop-filter: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,.07);
+}
+html:not([data-theme="dark"]) .ch { border-bottom-color: #E2EAF2; }
+html:not([data-theme="dark"]) .ct { color: var(--n700); }
+html:not([data-theme="dark"]) .scl,
+html:not([data-theme="dark"]) .scs {
+  color: #475569;
+  font-weight: 700;
+}
+html:not([data-theme="dark"]) .scv { color: var(--n700); }
+
+html:not([data-theme="dark"]) .f label {
+  color: #334155;
+  font-weight: 700;
+}
+html:not([data-theme="dark"]) .f input,
+html:not([data-theme="dark"]) .f select,
+html:not([data-theme="dark"]) .f textarea {
+  background: #fff;
+  color: #111827;
+  border-color: #c5d4e3;
+}
+html:not([data-theme="dark"]) .f input:focus,
+html:not([data-theme="dark"]) .f select:focus,
+html:not([data-theme="dark"]) .f textarea:focus {
+  border-color: var(--n500);
+  box-shadow: 0 0 0 3px rgba(13,33,55,.08);
+}
+html:not([data-theme="dark"]) .f select option {
+  background: #fff;
+  color: #111827;
+}
+html:not([data-theme="dark"]) .f input::placeholder,
+html:not([data-theme="dark"]) .f textarea::placeholder { color: #64748b; opacity: .9; }
+
+html:not([data-theme="dark"]) thead th {
+  background: var(--n700);
+  color: var(--gl);
+  border-bottom-color: rgba(201,168,76,.35);
+  font-weight: 700;
+  letter-spacing: .06em;
+}
+html:not([data-theme="dark"]) tbody td {
+  color: #374151;
+  border-bottom-color: #E2EAF2;
+}
+html:not([data-theme="dark"]) tbody tr:hover td { background: #F4F7FB; }
+
+html:not([data-theme="dark"]) .btn.bp {
+  background: linear-gradient(135deg, var(--n700), var(--n500));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(13,33,55,.2);
+}
+html:not([data-theme="dark"]) .btn.bg {
+  background: #fff;
+  border: 1px solid #c5d4e3;
+  color: var(--n500);
+}
+html:not([data-theme="dark"]) .btn.bg:hover {
+  border-color: var(--n700);
+  color: var(--n700);
+  background: #f8fafc;
+}
+html:not([data-theme="dark"]) .bgold {
+  background: linear-gradient(135deg, #5c4810, var(--g));
+  color: #1a1a1a;
+}
+html:not([data-theme="dark"]) .bdn { color: #b91c1c; background: #FEF2F2; border-color: #FECACA; }
+html:not([data-theme="dark"]) .bsc { color: #047857; background: #ECFDF5; border-color: #A7F3D0; }
+html:not([data-theme="dark"]) .bam { color: #92400e; background: #FFFBEB; border-color: #FDE68A; }
+
+html:not([data-theme="dark"]) .mo { background: rgba(13,33,55,.52); }
+html:not([data-theme="dark"]) .md {
+  background: #fff;
+  border-color: #D0DCE8;
+  color: #111827;
+}
+html:not([data-theme="dark"]) .mh {
+  background: #fff;
+  border-bottom-color: #E2EAF2;
+}
+html:not([data-theme="dark"]) .mt { color: var(--n700); }
+html:not([data-theme="dark"]) .mb { color: #374151; }
+html:not([data-theme="dark"]) .bcl { color: #64748b; }
+html:not([data-theme="dark"]) .bcl:hover { color: var(--n700); }
+html:not([data-theme="dark"]) .mtabs { background: #F4F7FB; }
+html:not([data-theme="dark"]) .mtab { color: #475569; }
+html:not([data-theme="dark"]) .mtab.on {
+  background: var(--n700);
+  color: #fff;
+}
+
+html:not([data-theme="dark"]) .dlt th {
+  background: var(--n700);
+  color: var(--gl);
+}
+html:not([data-theme="dark"]) .dlt td { border-bottom-color: #E2EAF2; }
+html:not([data-theme="dark"]) .dlt input,
+html:not([data-theme="dark"]) .dlt select {
+  background: #fff;
+  color: #111827;
+  border-color: #c5d4e3;
+}
+html:not([data-theme="dark"]) .dlt select option { background: #fff; color: #111827; }
+
+html:not([data-theme="dark"]) .totpan {
+  background: #F4F7FB;
+  border-color: #D0DCE8;
+  color: #374151;
+}
+html:not([data-theme="dark"]) .trow.grand { color: var(--n700); }
+
+html:not([data-theme="dark"]) .tpill {
+  background: #fff;
+  border-color: #c5d4e3;
+  color: #475569;
+}
+
+html:not([data-theme="dark"]) .toast.ok {
+  background: #ecfdf5;
+  border: 1px solid #6ee7b7;
+  color: #047857;
+}
+html:not([data-theme="dark"]) .toast.err {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+}
+html:not([data-theme="dark"]) .toast.warn {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  color: #92400e;
+}
+html:not([data-theme="dark"]) .toast.info {
+  background: #eff6ff;
+  border: 1px solid #93c5fd;
+  color: #1d4ed8;
+}
+html:not([data-theme="dark"]) .toast-title { color: inherit; }
+html:not([data-theme="dark"]) .toast-msg { opacity: .92; color: #1f2937; }
+
+html:not([data-theme="dark"]) .warnbox {
+  background: #FEF2F2;
+  border-color: #FECACA;
+  color: #991b1b;
+}
+html:not([data-theme="dark"]) .infobox {
+  background: #EFF6FF;
+  border-color: #BFDBFE;
+  color: #1e40af;
+}
+html:not([data-theme="dark"]) .urlbox {
+  background: #F4F7FB;
+  border-color: #c5d4e3;
+  color: #334155;
+}
+html:not([data-theme="dark"]) .accpreview { background: #fff; color: #374151; border-color: #D0DCE8; }
+html:not([data-theme="dark"]) .expcard {
+  background: #fff;
+  border-color: #D0DCE8;
+  color: #111827;
+}
+html:not([data-theme="dark"]) .expcard .edesc { color: #475569; }
+html:not([data-theme="dark"]) .ucard {
+  background: #fff;
+  border-color: #D0DCE8;
+  color: #111827;
+}
+html:not([data-theme="dark"]) .nldesc { color: #475569; }
+html:not([data-theme="dark"]) .sb-backdrop { background: rgba(13,33,55,.45); }
+
+html:not([data-theme="dark"]) .orc-panel {
+  border-color: rgba(201,168,76,.35) !important;
+  background: linear-gradient(135deg, #fff 0%, rgba(201,168,76,.06) 100%) !important;
+}
+html:not([data-theme="dark"]) .orc-tab {
+  background: #fff;
+  color: #475569;
+  border-color: #D0DCE8;
+}
+html:not([data-theme="dark"]) .orc-tab.on {
+  background: rgba(201,168,76,.12);
+  color: var(--n700);
+  border-color: rgba(201,168,76,.45);
+}
+
+html:not([data-theme="dark"]) h3 { color: var(--n700); }
+
+@media (max-width: 768px) {
+  .theme-corner-login .theme-btn {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 20px !important;
+  }
+  .topbar .theme-btn {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 20px !important;
+  }
+  .topbar .theme-seg { padding: 5px 6px; gap: 4px; }
+}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<meta name="theme-color" content="#d4af37">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Fligenio ERP">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -987,6 +1392,12 @@ body.mobile-nav-open .sb-backdrop {
      LOGIN
 ════════════════════════════════════════ -->
 <div id="loginWrap">
+  <div class="theme-corner-login" role="group" aria-label="Affichage clair ou sombre">
+    <div class="theme-seg">
+      <button type="button" class="theme-btn on" data-theme-pick="light" title="Mode clair" aria-pressed="true">☀️</button>
+      <button type="button" class="theme-btn" data-theme-pick="dark" title="Mode sombre" aria-pressed="false">🌙</button>
+    </div>
+  </div>
   <div class="lcard">
     <div class="lbrand">
       <div class="lmark" id="lMark"><img id="lLogo" class="lmark-logo" alt="Logo da empresa"><span id="lMarkFallback" class="lmark-fallback">📊</span></div>
@@ -996,16 +1407,16 @@ body.mobile-nav-open .sb-backdrop {
     </div>
     <!-- URL DA API — campo visível no login se não configurado -->
     <div id="l-url-section" style="margin-bottom:14px">
-      <div style="background:rgba(201,165,61,.06);border:1.5px solid rgba(201,165,61,.3);border-radius:8px;padding:12px 14px">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#c9a53d;margin-bottom:6px">🔌 URL da API — Obrigatório</div>
+      <div class="l-url-box" style="background:rgba(201,165,61,.06);border:1.5px solid rgba(201,165,61,.3);border-radius:8px;padding:12px 14px">
+        <div class="l-url-title" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#c9a53d;margin-bottom:6px">🔌 URL da API — Obrigatório</div>
         <input type="url" id="l-api-url" placeholder="https://script.google.com/macros/s/AKfycb.../exec"
           style="width:100%;padding:8px 11px;background:rgba(0,0,0,.3);border:1.5px solid rgba(201,165,61,.2);border-radius:6px;color:#e8eef8;font-family:monospace;font-size:11.5px;outline:none;transition:border-color .2s"
           autocomplete="off" oninput="onLoginUrl()">
-        <div style="font-size:10px;color:#6a82a0;margin-top:5px;line-height:1.6">
+        <div class="l-url-hint" style="font-size:10px;color:#6a82a0;margin-top:5px;line-height:1.6">
           Cole aqui o URL do seu Apps Script.<br>
           <em>Google Sheets → Extensões → Apps Script → Implementar → Gerir implementações</em>
         </div>
-        <button onclick="testLoginUrl()" style="width:100%;margin-top:8px;padding:7px;background:#c9a53d;color:#080d1a;border:none;border-radius:6px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s">🔌 Testar e Guardar URL</button>
+        <button type="button" class="l-url-testbtn" onclick="testLoginUrl()" style="width:100%;margin-top:8px;padding:7px;background:#c9a53d;color:#080d1a;border:none;border-radius:6px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s">🔌 Testar e Guardar URL</button>
         <div id="l-url-result" style="margin-top:6px;font-size:11.5px;display:none"></div>
       </div>
     </div>
@@ -1164,6 +1575,12 @@ body.mobile-nav-open .sb-backdrop {
       </div>
     </div>
     <div class="tbr">
+      <div class="topbar-theme-inline" role="group" aria-label="Thème">
+        <div class="theme-seg">
+          <button type="button" class="theme-btn on" data-theme-pick="light" title="Mode clair" aria-pressed="true">☀️</button>
+          <button type="button" class="theme-btn" data-theme-pick="dark" title="Mode sombre" aria-pressed="false">🌙</button>
+        </div>
+      </div>
       <div class="apistat"><div class="adot ld" id="aDot"></div><span id="aLbl">A conectar...</span></div>
       <div class="topbar-actions">
           <button class="btn bg bsm" type="button" onclick="openPesquisarModal()" title="Pesquisar documentos">🔍 Pesquisar</button>
@@ -2203,6 +2620,49 @@ const ls = (k,v) => {
   if (v===undefined) { try { return JSON.parse(localStorage.getItem(k)); } catch(e) { return null; } }
   localStorage.setItem(k, JSON.stringify(v));
 };
+
+const THEME_STORAGE_KEY = 'nhalabene_ui_theme';
+
+function applyNhalabeneThemeColorMeta() {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const c = dark ? '#070b11' : '#E8EEF6';
+  document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.setAttribute('content', c); });
+}
+
+function setNhalabeneTheme(mode) {
+  const dark = mode === 'dark';
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, dark ? 'dark' : 'light');
+  } catch (e) {}
+  if (dark) document.documentElement.setAttribute('data-theme', 'dark');
+  else document.documentElement.removeAttribute('data-theme');
+  applyNhalabeneThemeColorMeta();
+  syncNhalabeneThemeButtons();
+}
+
+function syncNhalabeneThemeButtons() {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.querySelectorAll('[data-theme-pick="light"]').forEach(b => {
+    b.classList.toggle('on', !dark);
+    b.setAttribute('aria-pressed', (!dark).toString());
+  });
+  document.querySelectorAll('[data-theme-pick="dark"]').forEach(b => {
+    b.classList.toggle('on', dark);
+    b.setAttribute('aria-pressed', dark.toString());
+  });
+}
+
+function initNhalabeneTheme() {
+  let mode = 'light';
+  try { if (localStorage.getItem(THEME_STORAGE_KEY) === 'dark') mode = 'dark'; } catch (e) {}
+  if (mode === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  else document.documentElement.removeAttribute('data-theme');
+  applyNhalabeneThemeColorMeta();
+  document.querySelectorAll('[data-theme-pick]').forEach(btn => {
+    btn.addEventListener('click', () => setNhalabeneTheme(btn.getAttribute('data-theme-pick') === 'dark' ? 'dark' : 'light'));
+  });
+  syncNhalabeneThemeButtons();
+}
 
 function normalizeSessionUser(raw) {
   const src = (raw && typeof raw === 'object') ? raw : {};
@@ -4967,6 +5427,7 @@ function checkAndShowUrlSection() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initNhalabeneTheme();
   // Restaurer la session
   const saved = ls('erp_s');
   loadCfg(); // Always load config first
