@@ -1,0 +1,11 @@
+{
+  "name": "fligenio-branding-tools",
+  "private": true,
+  "description": "Génération des icônes PWA à partir du logo (npm run icons)",
+  "scripts": {
+    "icons": "node generate-pwa-icons.mjs"
+  },
+  "devDependencies": {
+    "jimp": "^1.6.0"
+  }
+}
