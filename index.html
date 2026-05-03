@@ -3,24 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Fligenio · ERP PME</title>
-<meta name="theme-color" content="#eef3fa">
-<script>
-(function(){try{var d=localStorage.getItem('nhalabene_ui_theme')==='dark';if(d)document.documentElement.setAttribute('data-theme','dark');else document.documentElement.removeAttribute('data-theme');var c=d?'#070b11':'#eef3fa';document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.setAttribute('content',c);});}catch(e){}})();
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<title>Nhalabene · ERP v3.1</title>
+<!-- Marque (SVG + PNG): Marque-Entreprise-Nhalabene/ | Favicon PWA: Fligenio-version-final/icons/ -->
+<link rel="icon" type="image/png" sizes="512x512" href="Fligenio-version-final/icons/icon-512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="Fligenio-version-final/icons/icon-192.png">
+<link rel="apple-touch-icon" href="Fligenio-version-final/icons/icon-192.png">
+<link rel="manifest" href="Fligenio-version-final/manifest.webmanifest">
+<meta name="theme-color" content="#d4af37">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════════════════
-   ERP v3 — Interface professionnelle · clair & sombre
+   ERP SISTEMA v3.1 · DESIGN SYSTEM
+   Thème: Navy professionnel + or (PME PT)
 ══════════════════════════════════════════════════════ */
 :root {
-  /* Palette — navy / or type Premium Hotels + bleu lecture */
+  /* Palette principale */
   --n950:#040c1e; --n900:#07112a; --n800:#0c1c42;
-  --n700:#0D2137; --n600:#112844; --n500:#1B4F72;
-  --b400:#1B4F72; --b300:#2563a8; --b200:#6b93c4; --b100:#dbeafe;
-  /* Or — même tonalité que Staff_reception */
-  --g:#C9A84C; --gl:#E8CC80; --gll:#f0dfa0; --gs:rgba(201,168,76,.12);
+  --n700:#112358; --n600:#1a3470; --n500:#234798;
+  --b400:#3b82f6; --b300:#60a5fa; --b200:#93c5fd; --b100:#dbeafe;
+  /* Accentuation or — identité PME */
+  --g:#b8943a; --gl:#d4ad55; --gll:#f0cc7a; --gs:rgba(184,148,58,.12);
   /* Sémantique */
   --green:#16a34a; --greenl:#22c55e; --greenll:#86efac;
   --red:#dc2626; --redl:#ef4444; --redll:#fca5a5;
@@ -39,18 +41,13 @@
   --shd: 0 20px 60px rgba(0,0,0,.6);
   --shd-sm: 0 4px 20px rgba(0,0,0,.35);
   --r: 12px; --rs: 8px; --rxs: 5px;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --fd: 'Cormorant Garamond', 'Times New Roman', serif;
-  --fb: 'DM Sans', system-ui, sans-serif;
+  --fd: 'Syne', sans-serif;
+  --fb: 'Plus Jakarta Sans', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; font-family: var(--fb); color: var(--wh); overflow: hidden; }
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-body { background: var(--n950); text-rendering: optimizeLegibility; }
+body { background: var(--n950); }
 
 /* ─ Fond atmosphérique animé ─────────────────────── */
 .atmo {
@@ -301,7 +298,7 @@ body { background: var(--n950); text-rendering: optimizeLegibility; }
 .ni {
   display: flex; align-items: center; gap: 9px;
   padding: 8px 10px; border-radius: var(--rs);
-  cursor: pointer; transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out), transform 0.15s ease;
+  cursor: pointer; transition: all .17s;
   color: var(--sl4); font-size: 13px; font-weight: 500;
   user-select: none; margin-bottom: 1px;
   position: relative;
@@ -399,19 +396,13 @@ body { background: var(--n950); text-rendering: optimizeLegibility; }
 ══════════════════════════════════════════════════════ */
 .card {
   background: var(--surface); border: 1px solid var(--brd);
-  border-radius: var(--r); backdrop-filter: blur(10px) saturate(1.08);
-  -webkit-backdrop-filter: blur(10px) saturate(1.08);
-  transition: border-color 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out);
+  border-radius: var(--r); backdrop-filter: blur(8px);
 }
 .ch {
   padding: 15px 20px 13px; border-bottom: 1px solid var(--brd);
   display: flex; align-items: center; justify-content: space-between;
 }
-.ct {
-  font-family: var(--fd); font-size: 13.5px; font-weight: 700;
-  display: flex; align-items: center; gap: 8px;
-  letter-spacing: 0.01em;
-}
+.ct { font-family: var(--fd); font-size: 13.5px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
 .cb { padding: 20px; }
 
 /* Stat cards */
@@ -790,8 +781,6 @@ tbody tr.retard:hover td { background: rgba(220,38,38,.09); }
 .orc-sec-list{display:flex;flex-direction:column;gap:12px}
 .orc-sec-empty{padding:14px 16px;border:1px dashed rgba(201,165,61,.24);border-radius:10px;background:rgba(0,0,0,.18);font-size:11px;color:var(--sl4);line-height:1.65}
 .orc-sec-card{padding:14px;border:1px solid rgba(201,165,61,.16);border-radius:10px;background:rgba(0,0,0,.18)}
-.orc-cb{display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;margin:0;font-weight:500}
-.orc-sec-body-ta{min-height:180px;resize:vertical;width:100%;box-sizing:border-box}
 .orc-sec-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
 .orc-sec-name{font-size:11px;font-weight:700;color:var(--gll)}
 .orc-sec-actions{display:flex;gap:6px;flex-wrap:wrap}
@@ -983,665 +972,7 @@ body.mobile-nav-open .sb-backdrop {
   }
 }
 .btn, .ni, .ltab, .lbtn, .blogt { -webkit-tap-highlight-color: transparent; }
-
-/* ══════════════════════════════════════════════════════
-   Thème clair/sombre (Staff reception) + lisibilité renforcée
-══════════════════════════════════════════════════════ */
-.theme-corner-login {
-  position: absolute;
-  top: max(16px, env(safe-area-inset-top));
-  left: max(16px, env(safe-area-inset-left));
-  z-index: 12;
-}
-.theme-seg {
-  display: inline-flex;
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.22);
-  border-radius: 999px;
-  padding: 3px;
-  gap: 2px;
-}
-html[data-theme="dark"] .topbar .theme-seg {
-  background: rgba(0, 0, 0, 0.28);
-  border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-.theme-btn {
-  width: 36px;
-  height: 32px;
-  border: none;
-  border-radius: 999px;
-  background: transparent;
-  cursor: pointer;
-  font-size: 16px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color .2s, background .2s, box-shadow .2s;
-  color: rgba(255,255,255,.68);
-}
-.theme-corner-login .theme-btn { color: rgba(255,255,255,.75); }
-.theme-btn:hover { color: var(--gl); }
-.theme-btn.on {
-  background: rgba(201,168,76,.22);
-  color: var(--gl);
-  box-shadow: inset 0 0 0 1px rgba(201,168,76,.35);
-}
-.topbar-theme-inline {
-  margin-right: 8px;
-  flex-shrink: 0;
-}
-
-/* —— Thème sombre (data-theme="dark") : lisibilité & finition —— */
-html[data-theme="dark"] #loginWrap {
-  background: linear-gradient(155deg, #020814 0%, #0a1a32 48%, #050d1a 100%);
-}
-html[data-theme="dark"] .lcard {
-  border-color: rgba(201, 168, 76, 0.26);
-  box-shadow:
-    0 40px 100px rgba(0, 0, 0, 0.52),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-html[data-theme="dark"] {
-  color-scheme: dark;
-  --sl5: #8a9fb8;
-  --sl4: #b3c5db;
-  --sl3: #dce7f2;
-  --brd: rgba(255, 255, 255, 0.14);
-  --brd2: rgba(255, 255, 255, 0.2);
-  --surface: rgba(14, 32, 72, 0.88);
-  --surface2: rgba(8, 20, 48, 0.92);
-}
-html[data-theme="dark"] .topbar {
-  background: linear-gradient(180deg, rgba(12, 28, 58, 0.98) 0%, rgba(8, 20, 48, 0.94) 100%);
-  border-bottom-color: rgba(255, 255, 255, 0.14);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
-}
-html[data-theme="dark"] .tbt {
-  color: #faf6ec;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.4);
-}
-html[data-theme="dark"] .tbbr {
-  color: #c5d4e6;
-  font-weight: 500;
-}
-html[data-theme="dark"] .content {
-  color: #e8eef5;
-  scroll-behavior: smooth;
-}
-html[data-theme="dark"] .nsl {
-  color: #e8cc80;
-  opacity: 1;
-  letter-spacing: 0.14em;
-}
-html[data-theme="dark"] .ni {
-  color: #c9d8ea;
-  font-weight: 600;
-}
-html[data-theme="dark"] .ni:hover {
-  color: #fff;
-}
-html[data-theme="dark"] .ni.on {
-  color: #93c5fd;
-}
-html[data-theme="dark"] .ni.adm.on {
-  color: #f0dfa0;
-}
-html[data-theme="dark"] .sbname {
-  color: #faf6ec;
-}
-html[data-theme="dark"] .sbver2 {
-  color: #e8cc80;
-}
-html[data-theme="dark"] .ct {
-  color: #f5edd6;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-}
-html[data-theme="dark"] .ch {
-  border-bottom-color: rgba(255, 255, 255, 0.16);
-}
-html[data-theme="dark"] .card,
-html[data-theme="dark"] .sc {
-  border-color: rgba(255, 255, 255, 0.14);
-  border-radius: 14px;
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.2),
-    0 12px 40px rgba(0, 0, 0, 0.28);
-  backdrop-filter: saturate(1.12) blur(14px);
-  -webkit-backdrop-filter: saturate(1.12) blur(14px);
-}
-html[data-theme="dark"] .scl,
-html[data-theme="dark"] .scs {
-  color: #a8bdd4;
-}
-html[data-theme="dark"] .scv {
-  color: #faf6ec;
-}
-html[data-theme="dark"] .f label {
-  color: #b8ccdf;
-  font-weight: 800;
-}
-html[data-theme="dark"] .f input,
-html[data-theme="dark"] .f select,
-html[data-theme="dark"] .f textarea {
-  color: #f1f5f9;
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.38);
-}
-html[data-theme="dark"] .f input::placeholder,
-html[data-theme="dark"] .f textarea::placeholder {
-  color: #8ea3b8;
-  opacity: 0.95;
-}
-html[data-theme="dark"] thead th {
-  color: #f0dfa0;
-  background: rgba(0, 0, 0, 0.38);
-  border-bottom-color: rgba(255, 255, 255, 0.14);
-  font-weight: 800;
-}
-html[data-theme="dark"] tbody td {
-  color: #d8e4f0;
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-}
-html[data-theme="dark"] tbody tr:hover td {
-  background: rgba(59, 130, 246, 0.12);
-  color: #f8fafc;
-}
-html[data-theme="dark"] .infobox {
-  background: linear-gradient(135deg, rgba(30, 64, 120, 0.35) 0%, rgba(37, 99, 168, 0.22) 100%);
-  border-color: rgba(147, 197, 250, 0.45);
-  color: #e0efff;
-  font-weight: 500;
-  line-height: 1.55;
-  border-radius: 11px;
-}
-html[data-theme="dark"] .infobox strong {
-  color: #f0dfa0;
-}
-html[data-theme="dark"] .warnbox {
-  color: #fecaca;
-  font-weight: 600;
-}
-html[data-theme="dark"] .urlbox {
-  color: #c5d4e6;
-  border-color: rgba(255, 255, 255, 0.14);
-}
-html[data-theme="dark"] .mt {
-  color: #faf6ec;
-}
-html[data-theme="dark"] .mh {
-  border-bottom-color: rgba(255, 255, 255, 0.14);
-}
-html[data-theme="dark"] .apistat {
-  color: #b3c5db;
-  border-color: rgba(255, 255, 255, 0.14);
-}
-html[data-theme="dark"] .tpill {
-  color: #b8cadf;
-  border-color: rgba(255, 255, 255, 0.14);
-}
-html[data-theme="dark"] .dlt th {
-  color: #e8d5a3;
-  background: rgba(0, 0, 0, 0.38);
-}
-html[data-theme="dark"] .totpan {
-  border-color: rgba(255, 255, 255, 0.14);
-}
-html[data-theme="dark"] .blogt {
-  color: #b3c5db;
-}
-html[data-theme="dark"] .stimer {
-  color: #9eb4cc;
-}
-html[data-theme="dark"] .uname {
-  color: #f1f5f9;
-}
-html[data-theme="dark"] .ulvl.Visualizador {
-  color: #d1dae8;
-}
-html[data-theme="dark"] .bg {
-  color: #e8eef4;
-}
-html[data-theme="dark"] .orc-tab {
-  color: #b0c4d9;
-}
-html[data-theme="dark"] .orc-mode-note,
-html[data-theme="dark"] .orc-field-hint,
-html[data-theme="dark"] .orc-builder-sub,
-html[data-theme="dark"] .orc-sec-empty,
-html[data-theme="dark"] .orc-mini {
-  color: #a8bdd4;
-}
-html[data-theme="dark"] .nldesc {
-  color: #a8bdd4;
-}
-html[data-theme="dark"] .toast.info {
-  color: #93c5fd;
-}
-html[data-theme="dark"] .acchint {
-  color: #a8bdd4;
-}
-html[data-theme="dark"] .expcard .edesc {
-  color: #b3c5db;
-}
-html[data-theme="dark"] .bcl {
-  color: #b3c5db;
-}
-html[data-theme="dark"] .mtab {
-  color: #b0c4d9;
-}
-html[data-theme="dark"] .content h3 {
-  color: #f5edd6;
-  font-weight: 800;
-}
-html[data-theme="dark"] .ltitle {
-  color: #faf6ec;
-}
-html[data-theme="dark"] .lsub,
-html[data-theme="dark"] .lnote {
-  color: #b3c5db;
-}
-/* —— Mode clair (défaut : pas d’attribut data-theme) —— */
-html:not([data-theme="dark"]) {
-  color-scheme: light;
-}
-html:not([data-theme="dark"]) body {
-  background: linear-gradient(165deg, #eef3fa 0%, #e4ecf6 45%, #dce4f0 100%);
-  color: #111827;
-}
-html:not([data-theme="dark"]) .atmo,
-html:not([data-theme="dark"]) .grid-bg {
-  opacity: 0;
-  pointer-events: none;
-}
-html:not([data-theme="dark"]) .gold-line {
-  background: linear-gradient(90deg, transparent 0%, var(--g) 28%, var(--gl) 50%, var(--g) 72%, transparent 100%);
-}
-html:not([data-theme="dark"]) #loginWrap {
-  background: linear-gradient(135deg, #060e1c 0%, var(--n700) 55%, var(--n500) 100%);
-}
-html:not([data-theme="dark"]) .lcard {
-  background: #fff;
-  border: 1px solid #D0DCE8;
-  box-shadow: 0 6px 24px rgba(13,33,55,.14);
-  color: #111827;
-}
-html:not([data-theme="dark"]) .ltitle { color: var(--n700); }
-html:not([data-theme="dark"]) .lsub,
-html:not([data-theme="dark"]) .lnote { color: #475569; }
-html:not([data-theme="dark"]) .lver { color: #5b6472; }
-html:not([data-theme="dark"]) .ltab { color: #475569; }
-html:not([data-theme="dark"]) .ltab.on {
-  background: var(--n700);
-  color: #fff;
-}
-html:not([data-theme="dark"]) .lf label {
-  color: #334155;
-  font-weight: 700;
-}
-html:not([data-theme="dark"]) .lf input {
-  background: #fff;
-  color: #111827;
-  border-color: #c5d4e3;
-}
-html:not([data-theme="dark"]) .lf input:focus {
-  border-color: var(--n500);
-  box-shadow: 0 0 0 3px rgba(13,33,55,.1);
-}
-html:not([data-theme="dark"]) .lf input::placeholder { color: #64748b; opacity: .85; }
-html:not([data-theme="dark"]) .pind {
-  background: #fff;
-  color: #111827;
-  border-color: #c5d4e3;
-}
-html:not([data-theme="dark"]) .lbtn {
-  background: linear-gradient(135deg, var(--n700), var(--n500));
-  box-shadow: 0 4px 16px rgba(13,33,55,.22);
-}
-html:not([data-theme="dark"]) .lerr {
-  color: #b91c1c;
-  background: #FEF2F2;
-  border-color: #FECACA;
-}
-
-html:not([data-theme="dark"]) .sb {
-  background: linear-gradient(185deg, var(--n700) 0%, #0e3555 52%, var(--n600) 100%);
-  border-right-color: rgba(201, 168, 76, 0.24);
-  box-shadow: 4px 0 32px rgba(4, 12, 30, 0.14);
-}
-html:not([data-theme="dark"]) .nsl {
-  color: rgba(255,255,255,.78);
-  font-weight: 700;
-}
-html:not([data-theme="dark"]) .ni { color: rgba(255,255,255,.9); }
-html:not([data-theme="dark"]) .ni:hover {
-  background: rgba(255,255,255,.08);
-  color: #fff;
-}
-html:not([data-theme="dark"]) .ni.on {
-  background: rgba(201,168,76,.14);
-  color: var(--gl);
-  border-right: 2px solid var(--g);
-}
-html:not([data-theme="dark"]) .ni.adm.on {
-  background: rgba(201,168,76,.18);
-  color: var(--gl);
-  border-right-color: var(--g);
-}
-html:not([data-theme="dark"]) .sbname { color: #fff; }
-html:not([data-theme="dark"]) .sbver2 { color: var(--gl); }
-html:not([data-theme="dark"]) .sbico {
-  background: rgba(201,168,76,.15);
-  border: 1px solid rgba(201,168,76,.28);
-  box-shadow: none;
-  color: var(--gl);
-}
-html:not([data-theme="dark"]) .urow { background: rgba(255,255,255,.08); }
-html:not([data-theme="dark"]) .uname { color: #fff; }
-html:not([data-theme="dark"]) .ulvl.Admin { color: #e9d5ff; }
-html:not([data-theme="dark"]) .ulvl.Gestor { color: #bfdbfe; }
-html:not([data-theme="dark"]) .ulvl.Operador { color: #bbf7d0; }
-html:not([data-theme="dark"]) .ulvl.Visualizador { color: #e2e8f0; }
-html:not([data-theme="dark"]) .blogt { color: rgba(255,255,255,.8); }
-html:not([data-theme="dark"]) .stimer { color: rgba(255,255,255,.72); }
-
-html:not([data-theme="dark"]) .topbar {
-  background: linear-gradient(180deg, #0b304d 0%, var(--n700) 55%, #0c2844 100%);
-  border-bottom: 1px solid rgba(201, 168, 76, 0.32);
-  backdrop-filter: none;
-  box-shadow: 0 4px 20px rgba(4, 12, 30, 0.2);
-}
-html:not([data-theme="dark"]) .tbt {
-  color: #fff;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-html:not([data-theme="dark"]) .tbbr {
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 500;
-}
-html:not([data-theme="dark"]) .nav-toggle {
-  background: rgba(255,255,255,.1);
-  border-color: rgba(255,255,255,.25);
-  color: #fff;
-}
-html:not([data-theme="dark"]) .nav-toggle .hb > span { background: #f1f5f9; }
-html:not([data-theme="dark"]) .apistat {
-  color: rgba(255, 255, 255, 0.92);
-  border-color: rgba(255, 255, 255, 0.24);
-}
-
-html:not([data-theme="dark"]) .theme-seg {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-html:not([data-theme="dark"]) .topbar .theme-btn {
-  color: rgba(255, 255, 255, 0.78);
-}
-html:not([data-theme="dark"]) .topbar .theme-btn:hover {
-  color: var(--gl);
-}
-html:not([data-theme="dark"]) .topbar .theme-btn.on {
-  background: rgba(201, 168, 76, 0.32);
-  color: #fffef6;
-  box-shadow: inset 0 0 0 1px rgba(201, 168, 76, 0.45);
-}
-
-html:not([data-theme="dark"]) .content {
-  background: transparent;
-  scroll-behavior: smooth;
-}
-
-html:not([data-theme="dark"]) .card,
-html:not([data-theme="dark"]) .sc {
-  background: #fff;
-  border: 1px solid rgba(203, 213, 225, 0.85);
-  border-radius: 14px;
-  backdrop-filter: none;
-  box-shadow:
-    0 1px 2px rgba(13, 33, 55, 0.04),
-    0 8px 28px rgba(13, 33, 55, 0.07),
-    inset 0 1px 0 rgba(255, 255, 255, 0.65);
-}
-html:not([data-theme="dark"]) .ch {
-  border-bottom-color: rgba(226, 234, 242, 0.95);
-  padding: 16px 22px 14px;
-}
-html:not([data-theme="dark"]) .ct {
-  color: #0a2744;
-  font-weight: 800;
-  font-size: 14px;
-  letter-spacing: 0.02em;
-}
-html:not([data-theme="dark"]) .scl,
-html:not([data-theme="dark"]) .scs {
-  color: #475569;
-  font-weight: 700;
-}
-html:not([data-theme="dark"]) .scv { color: var(--n700); }
-
-html:not([data-theme="dark"]) .f label {
-  color: #334155;
-  font-weight: 700;
-}
-html:not([data-theme="dark"]) .f input,
-html:not([data-theme="dark"]) .f select,
-html:not([data-theme="dark"]) .f textarea {
-  background: #fff;
-  color: #111827;
-  border-color: #c5d4e3;
-}
-html:not([data-theme="dark"]) .f input:focus,
-html:not([data-theme="dark"]) .f select:focus,
-html:not([data-theme="dark"]) .f textarea:focus {
-  border-color: var(--n500);
-  box-shadow: 0 0 0 3px rgba(13,33,55,.08);
-}
-html:not([data-theme="dark"]) .f select option {
-  background: #fff;
-  color: #111827;
-}
-html:not([data-theme="dark"]) .f input::placeholder,
-html:not([data-theme="dark"]) .f textarea::placeholder { color: #64748b; opacity: .9; }
-
-html:not([data-theme="dark"]) thead th {
-  background: linear-gradient(180deg, #0c3355 0%, var(--n700) 100%);
-  color: #fdf6e3;
-  border-bottom-color: rgba(201, 168, 76, 0.4);
-  font-weight: 800;
-  letter-spacing: 0.07em;
-}
-html:not([data-theme="dark"]) tbody td {
-  color: #374151;
-  border-bottom-color: #E2EAF2;
-}
-html:not([data-theme="dark"]) tbody tr:hover td { background: #F4F7FB; }
-
-html:not([data-theme="dark"]) .btn.bp {
-  background: linear-gradient(135deg, var(--n700), var(--n500));
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(13,33,55,.2);
-}
-html:not([data-theme="dark"]) .btn.bg {
-  background: #fff;
-  border: 1px solid #c5d4e3;
-  color: var(--n500);
-}
-html:not([data-theme="dark"]) .btn.bg:hover {
-  border-color: var(--n700);
-  color: var(--n700);
-  background: #f8fafc;
-}
-html:not([data-theme="dark"]) .bgold {
-  background: linear-gradient(135deg, #5c4810, var(--g));
-  color: #1a1a1a;
-}
-html:not([data-theme="dark"]) .bdn { color: #b91c1c; background: #FEF2F2; border-color: #FECACA; }
-html:not([data-theme="dark"]) .bsc { color: #047857; background: #ECFDF5; border-color: #A7F3D0; }
-html:not([data-theme="dark"]) .bam { color: #92400e; background: #FFFBEB; border-color: #FDE68A; }
-
-html:not([data-theme="dark"]) .mo { background: rgba(13,33,55,.52); }
-html:not([data-theme="dark"]) .md {
-  background: #fff;
-  border-color: #D0DCE8;
-  color: #111827;
-}
-html:not([data-theme="dark"]) .mh {
-  background: #fff;
-  border-bottom-color: #E2EAF2;
-}
-html:not([data-theme="dark"]) .mt { color: var(--n700); }
-html:not([data-theme="dark"]) .mb { color: #374151; }
-html:not([data-theme="dark"]) .bcl { color: #64748b; }
-html:not([data-theme="dark"]) .bcl:hover { color: var(--n700); }
-html:not([data-theme="dark"]) .mtabs { background: #F4F7FB; }
-html:not([data-theme="dark"]) .mtab { color: #475569; }
-html:not([data-theme="dark"]) .mtab.on {
-  background: var(--n700);
-  color: #fff;
-}
-
-html:not([data-theme="dark"]) .dlt th {
-  background: linear-gradient(180deg, #0c3355 0%, var(--n700) 100%);
-  color: #fdf6e3;
-}
-html:not([data-theme="dark"]) .dlt td { border-bottom-color: #E2EAF2; }
-html:not([data-theme="dark"]) .dlt input,
-html:not([data-theme="dark"]) .dlt select {
-  background: #fff;
-  color: #111827;
-  border-color: #c5d4e3;
-}
-html:not([data-theme="dark"]) .dlt select option { background: #fff; color: #111827; }
-
-html:not([data-theme="dark"]) .totpan {
-  background: #F4F7FB;
-  border-color: #D0DCE8;
-  color: #374151;
-}
-html:not([data-theme="dark"]) .trow.grand { color: var(--n700); }
-
-html:not([data-theme="dark"]) .tpill {
-  background: #fff;
-  border-color: #c5d4e3;
-  color: #475569;
-}
-
-html:not([data-theme="dark"]) .toast.ok {
-  background: #ecfdf5;
-  border: 1px solid #6ee7b7;
-  color: #047857;
-}
-html:not([data-theme="dark"]) .toast.err {
-  background: #fef2f2;
-  border: 1px solid #fca5a5;
-  color: #b91c1c;
-}
-html:not([data-theme="dark"]) .toast.warn {
-  background: #fffbeb;
-  border: 1px solid #fcd34d;
-  color: #92400e;
-}
-html:not([data-theme="dark"]) .toast.info {
-  background: #eff6ff;
-  border: 1px solid #93c5fd;
-  color: #1d4ed8;
-}
-html:not([data-theme="dark"]) .toast-title { color: inherit; }
-html:not([data-theme="dark"]) .toast-msg { opacity: .92; color: #1f2937; }
-
-html:not([data-theme="dark"]) .warnbox {
-  background: #FEF2F2;
-  border-color: #FECACA;
-  color: #991b1b;
-}
-html:not([data-theme="dark"]) .infobox {
-  background: linear-gradient(135deg, #eff6ff 0%, #f4f9ff 100%);
-  border: 1px solid rgba(147, 197, 253, 0.65);
-  color: #1e3a8a;
-  line-height: 1.55;
-  font-weight: 500;
-  border-radius: 11px;
-}
-html:not([data-theme="dark"]) .urlbox {
-  background: #F4F7FB;
-  border-color: #c5d4e3;
-  color: #334155;
-}
-html:not([data-theme="dark"]) .accpreview { background: #fff; color: #374151; border-color: #D0DCE8; }
-html:not([data-theme="dark"]) .expcard {
-  background: #fff;
-  border-color: #D0DCE8;
-  color: #111827;
-}
-html:not([data-theme="dark"]) .expcard .edesc { color: #475569; }
-html:not([data-theme="dark"]) .ucard {
-  background: #fff;
-  border-color: #D0DCE8;
-  color: #111827;
-}
-html:not([data-theme="dark"]) .nldesc { color: #475569; }
-html:not([data-theme="dark"]) .sb-backdrop { background: rgba(13,33,55,.45); }
-
-html:not([data-theme="dark"]) .orc-panel {
-  border-color: rgba(201,168,76,.35) !important;
-  background: linear-gradient(135deg, #fff 0%, rgba(201,168,76,.06) 100%) !important;
-}
-html:not([data-theme="dark"]) .orc-tab {
-  background: #fff;
-  color: #475569;
-  border-color: #D0DCE8;
-}
-html:not([data-theme="dark"]) .orc-tab.on {
-  background: rgba(201,168,76,.12);
-  color: var(--n700);
-  border-color: rgba(201,168,76,.45);
-}
-
-html:not([data-theme="dark"]) h3 {
-  color: #0a2744;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-:focus-visible {
-  outline: 2px solid rgba(147, 197, 250, 0.95);
-  outline-offset: 2px;
-}
-html:not([data-theme="dark"]) :focus-visible {
-  outline-color: var(--n500);
-}
-  .theme-corner-login .theme-btn {
-    min-width: 44px !important;
-    min-height: 44px !important;
-    width: 44px !important;
-    height: 44px !important;
-    font-size: 20px !important;
-  }
-  .topbar .theme-btn {
-    min-width: 44px !important;
-    min-height: 44px !important;
-    width: 44px !important;
-    height: 44px !important;
-    font-size: 20px !important;
-  }
-  .topbar .theme-seg { padding: 5px 6px; gap: 4px; }
-}
 </style>
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Fligenio ERP">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
 <!-- Fond -->
@@ -1654,18 +985,27 @@ html:not([data-theme="dark"]) :focus-visible {
      LOGIN
 ════════════════════════════════════════ -->
 <div id="loginWrap">
-  <div class="theme-corner-login" role="group" aria-label="Affichage clair ou sombre">
-    <div class="theme-seg">
-      <button type="button" class="theme-btn on" data-theme-pick="light" title="Mode clair" aria-pressed="true">☀️</button>
-      <button type="button" class="theme-btn" data-theme-pick="dark" title="Mode sombre" aria-pressed="false">🌙</button>
-    </div>
-  </div>
   <div class="lcard">
     <div class="lbrand">
       <div class="lmark" id="lMark"><img id="lLogo" class="lmark-logo" alt="Logo da empresa"><span id="lMarkFallback" class="lmark-fallback">📊</span></div>
       <div class="ltitle">Nhalabene</div>
       <div class="lver">v3.1 · Gestão PME</div>
       <div class="lsub" style="margin-top:6px">Gestão Profissional · Solução PME</div>
+    </div>
+    <!-- URL DA API — campo visível no login se não configurado -->
+    <div id="l-url-section" style="margin-bottom:14px">
+      <div style="background:rgba(201,165,61,.06);border:1.5px solid rgba(201,165,61,.3);border-radius:8px;padding:12px 14px">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#c9a53d;margin-bottom:6px">🔌 URL da API — Obrigatório</div>
+        <input type="url" id="l-api-url" placeholder="https://script.google.com/macros/s/AKfycb.../exec"
+          style="width:100%;padding:8px 11px;background:rgba(0,0,0,.3);border:1.5px solid rgba(201,165,61,.2);border-radius:6px;color:#e8eef8;font-family:monospace;font-size:11.5px;outline:none;transition:border-color .2s"
+          autocomplete="off" oninput="onLoginUrl()">
+        <div style="font-size:10px;color:#6a82a0;margin-top:5px;line-height:1.6">
+          Cole aqui o URL do seu Apps Script.<br>
+          <em>Google Sheets → Extensões → Apps Script → Implementar → Gerir implementações</em>
+        </div>
+        <button onclick="testLoginUrl()" style="width:100%;margin-top:8px;padding:7px;background:#c9a53d;color:#080d1a;border:none;border-radius:6px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s">🔌 Testar e Guardar URL</button>
+        <div id="l-url-result" style="margin-top:6px;font-size:11.5px;display:none"></div>
+      </div>
     </div>
     <div class="ltabs">
       <button class="ltab on" onclick="swTab('pw')">🔐 Senha</button>
@@ -1823,12 +1163,6 @@ html:not([data-theme="dark"]) :focus-visible {
       </div>
     </div>
     <div class="tbr">
-      <div class="topbar-theme-inline" role="group" aria-label="Thème">
-        <div class="theme-seg">
-          <button type="button" class="theme-btn on" data-theme-pick="light" title="Mode clair" aria-pressed="true">☀️</button>
-          <button type="button" class="theme-btn" data-theme-pick="dark" title="Mode sombre" aria-pressed="false">🌙</button>
-        </div>
-      </div>
       <div class="apistat"><div class="adot ld" id="aDot"></div><span id="aLbl">A conectar...</span></div>
       <div class="topbar-actions">
           <button class="btn bg bsm" type="button" onclick="openPesquisarModal()" title="Pesquisar documentos">🔍 Pesquisar</button>
@@ -2274,7 +1608,6 @@ html:not([data-theme="dark"]) :focus-visible {
         </div>
       </div></div>
       <div class="card"><div class="ch"><div class="ct">🔌 URL da API (Apps Script)</div></div><div class="cb">
-        <p style="font-size:12px;color:var(--sl4);margin-bottom:12px;line-height:1.55">O URL por defeito vem do ficheiro HTML (<code>NHALABENE_API_URL</code>). Pode sobrescrever aqui para testes; o valor é guardado neste navegador.</p>
         <div class="f"><label>URL publicado — Web App</label><input type="url" id="cfg-url" placeholder="https://script.google.com/macros/s/..." oninput="saveCfg()"></div>
         <div class="urlbox" id="cfg-disp">Não configurado</div>
         <div style="display:flex;gap:8px;margin-top:14px">
@@ -2361,7 +1694,7 @@ html:not([data-theme="dark"]) :focus-visible {
           <div class="f"><label>ID pasta backups</label><input type="text" id="cfg-op-drive-bak" placeholder="ID da pasta Drive"></div>
         </div>
         <div class="fr">
-          <div class="f full"><label>Link logotipo (URL ou ID ficheiro Drive)</label><input type="text" id="cfg-op-logo" placeholder="https://... ou ID"></div>
+          <div class="f full"><label>Link logotipo (URL ou ID ficheiro Drive)</label><input type="text" id="cfg-op-logo" placeholder="https://... ou ID ou Marque-Entreprise-Nhalabene/png/logo-master-carre-1024.png"></div>
         </div>
         <div class="fr">
           <div class="f full"><label>Condições gerais (texto longo)</label><textarea id="cfg-op-cond" rows="3" placeholder="Aparecem no PDF quando aplicável"></textarea></div>
@@ -2583,7 +1916,7 @@ html:not([data-theme="dark"]) :focus-visible {
           <div class="orc-builder-head">
             <div>
               <div class="orc-builder-title">Secções adicionais do Orçamento B</div>
-              <div class="orc-builder-sub">Crie blocos extra (como &laquo;páginas&raquo; no PDF): metodologia, exclusões, cronograma, galeria, anexos técnicos, etc. Cada secção tem o seu alinhamento, formatação (H1–H3, negrito&hellip;) e anexos. Marque &laquo;Nova página no PDF&raquo; para forçar um salto antes de uma secção.</div>
+              <div class="orc-builder-sub">Crie blocos extra para metodologia, exclusões, cronograma, galeria, anexos técnicos ou qualquer outro conteúdo. Cada secção pode ter o seu próprio alinhamento, formato e anexos.</div>
             </div>
             <div class="orc-sec-actions">
               <button class="btn bg bxs" type="button" onclick="addOrcSection()">+ Secção</button>
@@ -2943,8 +2276,15 @@ const ST = {
   orcSections: [],
   orcSectionCounter: 0,
   docSort: { orc:'recent', pro:'recent', fat:'recent', rec:'recent' },
-  docSortDir: { orc:'desc', pro:'desc', fat:'desc', rec:'desc' }
+  docSortDir: { orc:'desc', fat:'desc', rec:'desc' }
 };
+
+/** Logo du kit marque — chemin relatif à ce fichier HTML si le déploiement inclut tout le dossier du projet. */
+const NHALABENE_KIT_LOGO_URL = 'Marque-Entreprise-Nhalabene/png/logo-master-carre-1024.png';
+function resolveNhalabeneLogoUrl(logoUrl) {
+  const s = String(logoUrl || '').trim();
+  return s || NHALABENE_KIT_LOGO_URL;
+}
 
 // Permissions miroir (frontend) — synchronisées avec le serveur
 const ALL_PERMS = {
@@ -2967,49 +2307,6 @@ const ls = (k,v) => {
   if (v===undefined) { try { return JSON.parse(localStorage.getItem(k)); } catch(e) { return null; } }
   localStorage.setItem(k, JSON.stringify(v));
 };
-
-const THEME_STORAGE_KEY = 'nhalabene_ui_theme';
-
-function applyNhalabeneThemeColorMeta() {
-  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-  const c = dark ? '#070b11' : '#eef3fa';
-  document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.setAttribute('content', c); });
-}
-
-function setNhalabeneTheme(mode) {
-  const dark = mode === 'dark';
-  try {
-    localStorage.setItem(THEME_STORAGE_KEY, dark ? 'dark' : 'light');
-  } catch (e) {}
-  if (dark) document.documentElement.setAttribute('data-theme', 'dark');
-  else document.documentElement.removeAttribute('data-theme');
-  applyNhalabeneThemeColorMeta();
-  syncNhalabeneThemeButtons();
-}
-
-function syncNhalabeneThemeButtons() {
-  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-  document.querySelectorAll('[data-theme-pick="light"]').forEach(b => {
-    b.classList.toggle('on', !dark);
-    b.setAttribute('aria-pressed', (!dark).toString());
-  });
-  document.querySelectorAll('[data-theme-pick="dark"]').forEach(b => {
-    b.classList.toggle('on', dark);
-    b.setAttribute('aria-pressed', dark.toString());
-  });
-}
-
-function initNhalabeneTheme() {
-  let mode = 'light';
-  try { if (localStorage.getItem(THEME_STORAGE_KEY) === 'dark') mode = 'dark'; } catch (e) {}
-  if (mode === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-  else document.documentElement.removeAttribute('data-theme');
-  applyNhalabeneThemeColorMeta();
-  document.querySelectorAll('[data-theme-pick]').forEach(btn => {
-    btn.addEventListener('click', () => setNhalabeneTheme(btn.getAttribute('data-theme-pick') === 'dark' ? 'dark' : 'light'));
-  });
-  syncNhalabeneThemeButtons();
-}
 
 function normalizeSessionUser(raw) {
   const src = (raw && typeof raw === 'object') ? raw : {};
@@ -3195,17 +2492,11 @@ async function testConn() {
 // ════════════════════════════════════════════════════════════════
 function saveCfg() {
   ST.apiUrl = (document.getElementById('cfg-url')?.value || '').trim();
-  try {
-    if (ST.apiUrl) localStorage.setItem('erp_api', JSON.stringify(ST.apiUrl));
-    else localStorage.removeItem('erp_api');
-  } catch (e) {}
+  ls('erp_api', ST.apiUrl);
   const d = document.getElementById('cfg-disp'); if (d) d.textContent = ST.apiUrl || 'Não configurado';
 }
 function loadCfg() {
-  const embedded = (typeof NHALABENE_API_URL !== 'undefined' && NHALABENE_API_URL) ? String(NHALABENE_API_URL).trim() : '';
-  let fromStore = ls('erp_api');
-  if (typeof fromStore !== 'string') fromStore = fromStore != null ? String(fromStore).trim() : '';
-  ST.apiUrl = (fromStore && fromStore.length > 10) ? fromStore : embedded;
+  ST.apiUrl = ls('erp_api') || (typeof NHALABENE_API_URL !== 'undefined' ? NHALABENE_API_URL : '') || '';
   const el = document.getElementById('cfg-url'); if (el) el.value = ST.apiUrl;
   const d  = document.getElementById('cfg-disp'); if (d) d.textContent = ST.apiUrl || 'Não configurado';
   // Load empresa config on every page load
@@ -3216,7 +2507,7 @@ function loadCfg() {
   const sEl = document.getElementById('cfg-empresa-sigla');
   if (nEl) nEl.value = savedNome;
   if (sEl) sEl.value = savedSigla;
-  if (savedNome || savedLogo) applyEmpresaToUI(savedNome || 'Nhalabene', savedSigla, savedLogo);
+  applyEmpresaToUI(savedNome || 'Nhalabene', savedSigla, savedLogo);
   syncEmpresaFromSheets();
   if (ST.token && ST.apiUrl) loadCfgContab();
 }
@@ -3233,7 +2524,6 @@ function populateCompanyConfig(cfg) {
   if (!cfg) return;
   const map = {
     'cfg-empresa-nome': cfg.empresa || '',
-    'cfg-empresa-sigla': cfg.sigla || '',
     'cfg-empresa-nif': cfg.nif || '',
     'cfg-empresa-morada': cfg.morada || '',
     'cfg-empresa-cp': cfg.codPostal || '',
@@ -3323,7 +2613,7 @@ function setBrandImage(imgEl, src, toggle) {
   imgEl.src = clean;
 }
 function applyEmpresaLogoToUI(logoUrl) {
-  const clean = String(logoUrl || '').trim();
+  const clean = resolveNhalabeneLogoUrl(logoUrl);
 
   const sbLogo = document.getElementById('sbLogo');
   const sbIco = document.getElementById('sbIco');
@@ -3766,7 +3056,6 @@ async function doLogout() {
   document.getElementById('app').style.display='none';
   document.getElementById('loginWrap').style.display='flex';
   document.getElementById('lU').value=''; document.getElementById('lP').value='';
-  loadCfg();
 }
 
 function applyPerms() {
@@ -5171,7 +4460,6 @@ function getEmptyOrcSection(preset){
     body: String(cfg.body || '').trim(),
     format: String(cfg.format || getOrcamentoDefaultFormat()).trim() || 'auto',
     align: String(cfg.align || getOrcamentoDefaultAlign()).trim() || 'justify',
-    breakBefore: !!cfg.breakBefore,
     attachments: Array.isArray(cfg.attachments) ? cfg.attachments.map(asset => normalizeOrcAttachment(id, asset)) : []
   };
 }
@@ -5213,10 +4501,6 @@ function moveOrcSection(sectionId, delta){
 function updateOrcSectionField(sectionId, field, value){
   const section = getOrcSectionById(sectionId);
   if (!section) return;
-  if (field === 'breakBefore') {
-    section.breakBefore = !!value;
-    return;
-  }
   section[field] = String(value || '');
 }
 
@@ -5232,7 +4516,6 @@ function buildOrcamentoBConfig(){
       body: String(section.body || '').trim(),
       format: String(section.format || getOrcamentoDefaultFormat()).trim() || getOrcamentoDefaultFormat(),
       align: String(section.align || getOrcamentoDefaultAlign()).trim() || getOrcamentoDefaultAlign(),
-      breakBefore: !!section.breakBefore,
       attachments: (section.attachments || []).map(asset => ({
         name: String(asset.name || '').trim(),
         mimeType: String(asset.mimeType || '').trim(),
@@ -5241,7 +4524,7 @@ function buildOrcamentoBConfig(){
         dataBase64: String(asset.dataBase64 || '').trim(),
         size: parseInt(asset.size, 10) || 0
       })).filter(asset => asset.name || asset.url || asset.dataBase64)
-    })).filter(section => section.title || section.hint || section.body || section.attachments.length || section.breakBefore)
+    })).filter(section => section.title || section.hint || section.body || section.attachments.length)
   };
 }
 
@@ -5288,7 +4571,6 @@ function renderOrcamentoSections(){
         <div class="f"><label>Texto de apoio</label><input type="text" value="${escHtml(section.hint || '')}" placeholder="Texto curto opcional antes do conteúdo" oninput="updateOrcSectionField('${section.id}','hint',this.value)"></div>
         <div class="f"><label>Formato</label><select onchange="updateOrcSectionField('${section.id}','format',this.value)"><option value="auto" ${section.format==='auto'?'selected':''}>Automático</option><option value="texto" ${section.format==='texto'?'selected':''}>Texto livre</option><option value="marcadores" ${section.format==='marcadores'?'selected':''}>Marcadores</option><option value="numerado" ${section.format==='numerado'?'selected':''}>Numerado</option></select></div>
         <div class="f"><label>Alinhamento</label><select onchange="updateOrcSectionField('${section.id}','align',this.value)"><option value="left" ${section.align==='left'?'selected':''}>Esquerda</option><option value="justify" ${section.align==='justify'?'selected':''}>Justificado</option><option value="center" ${section.align==='center'?'selected':''}>Centro</option><option value="right" ${section.align==='right'?'selected':''}>Direita</option></select></div>
-        <div class="f full"><label class="orc-cb"><input type="checkbox" ${section.breakBefore?'checked':''} onchange="updateOrcSectionField('${section.id}','breakBefore',this.checked)"> Nova página no PDF antes desta secção</label></div>
         <div class="f full">
           <label>Conteúdo</label>
           <div class="orc-toolbar">
@@ -5305,7 +4587,7 @@ function renderOrcamentoSections(){
             <button class="btn bg bxs" type="button" onclick="formatDocTextarea('orc-sec-body-${section.id}','bullets')">• Lista</button>
             <button class="btn bg bxs" type="button" onclick="formatDocTextarea('orc-sec-body-${section.id}','numbers')">1. Lista</button>
           </div>
-          <textarea id="orc-sec-body-${section.id}" rows="12" class="orc-sec-body-ta" placeholder="Escreva aqui o conteúdo desta secção..." oninput="updateOrcSectionField('${section.id}','body',this.value); updCC('orc-sec-body-${section.id}','orc-sec-count-${section.id}')">${escHtml(section.body || '')}</textarea>
+          <textarea id="orc-sec-body-${section.id}" rows="5" placeholder="Escreva aqui o conteúdo desta secção..." oninput="updateOrcSectionField('${section.id}','body',this.value); updCC('orc-sec-body-${section.id}','orc-sec-count-${section.id}')">${escHtml(section.body || '')}</textarea>
           <div class="orc-char" id="orc-sec-count-${section.id}">${String(section.body || '').length} caracteres</div>
         </div>
         <div class="f"><label>Ficheiros / imagens</label><input type="file" multiple accept="image/*,.pdf,.txt,.doc,.docx,.xls,.xlsx" onchange="handleOrcSectionFiles('${section.id}', this)"></div>
@@ -5527,7 +4809,7 @@ function setOrcamentoModel(model, btn){
   const note = document.getElementById('orc-mode-note');
   if(note){
     note.textContent = normalized === 'OrcamentoB'
-      ? 'Orçamento B: subtipo, títulos personalizados, texto de apoio, várias secções (blocos tipo páginas) com formatação, anexos por secção, imagem de capa — tudo guardado com o documento. No PDF marque «Nova página» por secção para saltos.'
+      ? 'Orçamento B: pode usar subtipo, títulos personalizados, texto de apoio, secções livres, alinhamento por bloco e anexos/imagens por secção.'
       : 'Modo clássico: mantém o orçamento tradicional, simples e limpo.';
   }
   if (normalized === 'OrcamentoB' && !(ST.orcSections || []).length) {
@@ -5934,21 +5216,67 @@ function pgBdg(e) {
 // INIT
 // ════════════════════════════════════════════════════════════════
 
-// ── URL API: definida em NHALABENE_API_URL no HTML; sobrescrever em Config opcional ──
-function onLoginUrl() {}
+// ── Login URL functions ─────────────────────────────────────────
+function onLoginUrl() {
+  const url = (document.getElementById('l-api-url')?.value || '').trim();
+  ST.apiUrl = url;
+}
+
 async function testLoginUrl() {
-  loadCfg();
-  if (!ST.apiUrl || ST.apiUrl.length < 10) {
-    toast('URL da API em falta. Defina NHALABENE_API_URL no HTML ou em Configuração.', 'warn');
+  const url = (document.getElementById('l-api-url')?.value || '').trim();
+  if (!url || !url.includes('script.google.com')) {
+    showUrlResult('err', '❌ URL inválido. Deve começar com https://script.google.com/macros/s/');
     return;
   }
-  await testConn();
+  showUrlResult('info', '⏳ A testar ligação...');
+  try {
+    const r = await fetch(url + '?action=ping');
+    const d = await r.json();
+    if (d.ok) {
+      ST.apiUrl = url;
+      ls('erp_api', url);
+      // Update cfg-url input too
+      const cfgEl = document.getElementById('cfg-url');
+      if (cfgEl) cfgEl.value = url;
+      syncEmpresaFromSheets();
+      showUrlResult('ok', '✅ Ligado: ' + (d.spreadsheet || 'Nhalabene ERP') + ' — Pode fazer login!');
+      // Hide the URL section after success
+      setTimeout(() => {
+        const sect = document.getElementById('l-url-section');
+        if (sect) sect.style.display = 'none';
+      }, 2000);
+    } else {
+      showUrlResult('err', '❌ Erro: ' + (d.error || 'Resposta inválida'));
+    }
+  } catch(e) {
+    showUrlResult('err', '❌ Sem resposta. Verifique o URL e a ligação à internet.');
+  }
 }
-function showUrlResult() {}
-function checkAndShowUrlSection() {}
+
+function showUrlResult(type, msg) {
+  const el = document.getElementById('l-url-result');
+  if (!el) return;
+  const colors = { ok: '#10b981', err: '#f43f5e', info: '#6a82a0', warn: '#f59e0b' };
+  el.style.display = 'block';
+  el.style.color = colors[type] || '#aab8d0';
+  el.textContent = msg;
+}
+
+function checkAndShowUrlSection() {
+  const sect = document.getElementById('l-url-section');
+  if (!sect) return;
+  // Show URL section only if no URL configured
+  if (!ST.apiUrl || ST.apiUrl.length < 10) {
+    sect.style.display = 'block';
+  } else {
+    sect.style.display = 'none';
+    // Pre-fill if already configured
+    const el = document.getElementById('l-api-url');
+    if (el && ST.apiUrl) el.value = ST.apiUrl;
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-  initNhalabeneTheme();
   // Restaurer la session
   const saved = ls('erp_s');
   loadCfg(); // Always load config first
@@ -5961,10 +5289,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ls('erp_s', { token: ST.token, user: ST.user, exp: saved.exp });
         bootApp();
       }
-      else { ls('erp_s', null); }
+      else { ls('erp_s', null); checkAndShowUrlSection(); }
     });
   } else {
-    /* login: apiUrl já vem de NHALABENE_API_URL / loadCfg */
+    checkAndShowUrlSection();
   }
   // Setup PIN login
   initPIN('PR');
@@ -6074,10 +5402,5 @@ function updCC(taId, countId) {
     return out;
   };
 })();
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js', { scope: './' }).catch(function () {});
-}
 </script>
 </body></html>
