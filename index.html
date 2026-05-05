@@ -4259,7 +4259,8 @@ function renderPesquisar(){
     <td>${d.cliente||'—'}</td>
     <td>€ ${fmt(d.total)}</td>
     <td>${renderPdfActionButtons(d.pdf)}</td>
-    <td style="display:flex;gap:6px">
+      <td style="display:flex;gap:6px">
+      ${!d.anulado&&d.tipo==='Orçamento'&&ST.perms.canCreate?`<button class="btn bg bxs" onclick="openDuplicateOrcamento('${d.id}')" title="Duplicar — novo orçamento">📑</button>`:''}
       <button class="btn bg bxs" onclick="openEditDoc('${d.id}')">✏️</button>
       <button class="btn bg bxs" onclick="genPDF('${d.id}')">📄</button>
       <button class="btn bg bxs" onclick="emailDoc('${d.id}','${d.tipo}')">📧</button>
@@ -4346,6 +4347,7 @@ function renderPesquisaPage(){
       <td>${estHtml}</td>
       <td>${renderPdfActionButtons(d.pdf)}</td>
       <td><div style="display:flex;gap:3px;flex-wrap:wrap">
+        ${!d.anulado&&ST.perms.canCreate&&tipoD==='Orçamento'?`<button class="btn bg bxs" onclick="openDuplicateOrcamento('${d.id}')" title="Duplicar — novo orçamento">📑</button>`:''}
         ${!d.anulado&&ST.perms.canEdit?`<button class="btn bg bxs" onclick="openEditDoc('${d.id}')" title="Editar">✏️</button>`:''}
         ${!d.anulado&&ST.perms.canPDF?`<button class="btn bg bxs" onclick="genPDF('${d.id}')" title="PDF">📄</button>`:''}
         ${!d.anulado&&ST.perms.canConvert&&tipoD!=='Recibo'?`<button class="btn bg bxs" onclick="convDoc('${d.id}')" title="Converter">🔄</button>`:''}
@@ -4510,6 +4512,7 @@ function rT(tipo) {
       <td>${tipo==='Fatura'?pgBdg(d.estadoPgto):estadoBdg(d.estado)}</td>
       <td>${renderPdfActionButtons(d.pdf)}</td>
       <td><div style="display:flex;gap:3px;flex-wrap:wrap">
+        ${!d.anulado&&ST.perms.canCreate&&tipo==='Orçamento'?`<button class="btn bg bxs" onclick="openDuplicateOrcamento('${d.id}')" title="Duplicar — novo orçamento">📑</button>`:''}
         ${!d.anulado&&ST.perms.canEdit?`<button class="btn bg bxs" onclick="openEditDoc('${d.id}')" title="Editar">✏️</button>`:''}
         ${!d.anulado&&ST.perms.canPDF?`<button class="btn bg bxs" onclick="genPDF('${d.id}')" title="PDF">📄</button>`:''}
         ${!d.anulado&&ST.perms.canConvert&&tipo!=='Recibo'?`<button class="btn bg bxs" onclick="convDoc('${d.id}')" title="Converter">🔄</button>`:''}
@@ -4782,6 +4785,32 @@ async function openEditDoc(id) {
   // Load ORC fields if Orçamento
   const descEl = document.getElementById('d-descricao'); if(descEl){ descEl.value = doc.descricao||''; updCC('d-descricao','cc-desc'); }
   const condEl = document.getElementById('d-condicoes'); if(condEl){ condEl.value = doc.condicoes||''; updCC('d-condicoes','cc-cond'); }
+}
+
+/** Abre o mesmo formulário que Editar, mas sem ID — grava como novo orçamento (número novo). */
+async function openDuplicateOrcamento(id) {
+  const doc = ST.docs.find(d => d.id === id);
+  if (!doc || doc.tipo !== 'Orçamento') {
+    toast('Selecione um orçamento válido.', 'warn', 'Duplicar');
+    return;
+  }
+  if (doc.anulado) {
+    toast('Não é possível duplicar um documento anulado.', 'warn', 'Duplicar');
+    return;
+  }
+  if (!ST.perms.canCreate) {
+    toast('Sem permissão para criar documentos.', 'err', 'Duplicar');
+    return;
+  }
+  const origemNum = doc.numero || id;
+  await openEditDoc(id);
+  document.getElementById('d-id').value = '';
+  const hoje = new Date().toISOString().split('T')[0];
+  document.getElementById('d-data').value = hoje;
+  const dias = parseInt(ST.cfg && ST.cfg.diasValOrc, 10);
+  document.getElementById('d-validade').value = addDaysISO(hoje, !isNaN(dias) && dias > 0 ? dias : 30);
+  document.getElementById('mo-doc-t').textContent = `📋 Novo Orçamento (cópia de ${origemNum})`;
+  toast('Revise e guarde: será criado um novo número de orçamento.', 'info', 'Duplicar');
 }
 
 function sTipo(tipo, el) {
