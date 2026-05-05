@@ -138,7 +138,7 @@ body { background: var(--n950); text-rendering: optimizeLegibility; }
 
 .lbrand { text-align: center; margin-bottom: 32px; }
 .lmark {
-  width: 68px; height: 68px; border-radius: 18px;
+  width: 80px; height: 80px; border-radius: 18px;
   margin: 0 auto 16px;
   background: linear-gradient(135deg, var(--n600) 0%, var(--n500) 50%, var(--b400) 100%);
   display: flex; align-items: center; justify-content: center; font-size: 30px;
@@ -146,7 +146,7 @@ body { background: var(--n950); text-rendering: optimizeLegibility; }
   position: relative; overflow: hidden;
 }
 .lmark.has-logo { background: rgba(255,255,255,.96); box-shadow: 0 10px 28px rgba(0,0,0,.26), 0 0 0 1px rgba(184,148,58,.22); }
-.lmark-logo { width: 100%; height: 100%; object-fit: contain; padding: 10px; display: none; }
+.lmark-logo { width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 8px; display: none; }
 .lmark.has-logo .lmark-logo { display: block; }
 .lmark-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
 .brand-prev-logo {
@@ -1816,7 +1816,7 @@ html:not([data-theme="dark"]) :focus-visible {
       <div class="lmark" id="lMark"><img id="lLogo" class="lmark-logo" alt="Logo da empresa"><span id="lMarkFallback" class="lmark-fallback">📊</span></div>
       <div class="ltitle">NHALABENE</div>
       <div class="lver">v3.1 · Para TPE</div>
-      <div class="lsub" style="margin-top:6px">Micro e pequenas empresas hoje · evolução prevista para PME</div>
+      <div class="lsub" style="margin-top:6px">Gestion de Orçamentos, Recibos e Faturas</div>
     </div>
     <div class="ltabs">
       <button class="ltab on" onclick="swTab('pw')">🔐 Senha</button>
@@ -2512,7 +2512,7 @@ html:not([data-theme="dark"]) :focus-visible {
           <div class="f"><label>ID pasta backups</label><input type="text" id="cfg-op-drive-bak" placeholder="ID da pasta Drive"></div>
         </div>
         <div class="fr">
-          <div class="f full"><label>Link logotipo (URL ou ID ficheiro Drive)</label><input type="text" id="cfg-op-logo" placeholder="https://... ou ID"></div>
+          <div class="f full"><label>Link logotipo (URL, ID Drive ou pasta — use empresa-logo.png na pasta para igual ao site)</label><input type="text" id="cfg-op-logo" placeholder="ID / URL / pasta Drive · ficheiro recomendado: empresa-logo.png"></div>
         </div>
         <div class="fr">
           <div class="f full"><label>Condições gerais (texto longo)</label><textarea id="cfg-op-cond" rows="3" placeholder="Aparecem no PDF quando aplicável"></textarea></div>
@@ -3079,14 +3079,17 @@ const NHALABENE_API_URL = 'https://script.google.com/macros/s/AKfycbxO5eKRkpPHkg
 
 //
 // ── Cliente / white-label (opcional) ─────────────────────────────────
-// Contexto: HTML para Fligenio; empresa TPE « Genius Raros Lda » (logo na pasta « logo Genius Raros », ficheiro Logo.png).
-// Cópia servida pela app: branding/genius-raros-lda-logo.png
-// Marcar true para pré-preencher nome, sigla e logótipo local na primeira visita (sem dados em localStorage).
+// Logótipo único (login, app, PDF via Drive):
+//   • Ficheiro local: branding/empresa-logo.png (mesmo ficheiro que pode enviar para o Drive com o mesmo nome).
+//   • Tamanho recomendado: PNG, 480–900 px de largura, proporção ~1:1 a 3:1, até ~600 KB, fundo transparente se o PDF for branco.
+//   • Fallback local: branding/genius-raros-lda-logo.png
+// Marcar true para pré-preencher nome, sigla e logótipo na primeira visita (sem dados em localStorage).
+const NH_BRAND_LOGO_DEFAULT_FILES = ['branding/empresa-logo.png', 'branding/genius-raros-lda-logo.png'];
 const NH_CLIENT_GENIUS_RAROS_DEFAULTS = true;
 const NH_CLIENT_GENIUS_RAROS_PROFILE = {
   empresa: 'Genius Raros Lda',
   sigla: 'Genius Raros',
-  logoRelPath: 'branding/genius-raros-lda-logo.png'
+  logoRelPaths: ['branding/empresa-logo.png', 'branding/genius-raros-lda-logo.png']
 };
 //
 
@@ -3357,13 +3360,54 @@ async function testConn() {
 // ════════════════════════════════════════════════════════════════
 // CONFIG
 // ════════════════════════════════════════════════════════════════
+/** Ordem dos ficheiros locais do logótipo (login + app); PDF usa o mesmo ficheiro no Drive: empresa-logo.png */
+function getLocalBrandLogoCandidates() {
+  const p = (typeof NH_CLIENT_GENIUS_RAROS_PROFILE === 'object' && NH_CLIENT_GENIUS_RAROS_PROFILE) ? NH_CLIENT_GENIUS_RAROS_PROFILE : {};
+  let list = [];
+  if (Array.isArray(p.logoRelPaths) && p.logoRelPaths.length) {
+    list = p.logoRelPaths.map(s => String(s || '').trim()).filter(Boolean);
+  } else if (String(p.logoRelPath || '').trim()) {
+    list = [String(p.logoRelPath).trim()];
+  }
+  const defs = (typeof NH_BRAND_LOGO_DEFAULT_FILES !== 'undefined' && Array.isArray(NH_BRAND_LOGO_DEFAULT_FILES)) ? NH_BRAND_LOGO_DEFAULT_FILES : ['branding/empresa-logo.png'];
+  defs.forEach(f => { if (f && list.indexOf(f) < 0) list.push(f); });
+  return list;
+}
+function shouldProbeLocalBrandLogo(stored) {
+  const s = String(stored || '').trim();
+  if (!s) return true;
+  if (/^https?:\/\//i.test(s) || s.indexOf('data:') === 0) return false;
+  return /\.(png|jpe?g|webp|gif|svg)(\?|$)/i.test(s) || s.indexOf('branding/') === 0;
+}
+function preflightLocalLogoChain(candidates, stored, done) {
+  const chain = Array.isArray(candidates) ? candidates.slice() : [];
+  const st = String(stored || '').trim();
+  const list = [];
+  if (st) list.push(st);
+  chain.forEach(c => { if (c && list.indexOf(c) < 0) list.push(c); });
+  let i = 0;
+  const im = new Image();
+  function next() {
+    if (i >= list.length) {
+      done(st || '');
+      return;
+    }
+    const u = list[i++];
+    im.onload = () => done(u);
+    im.onerror = next;
+    im.src = u + (u.indexOf('?') >= 0 ? '&' : '?') + '_ts=' + Date.now();
+  }
+  next();
+}
+
 /** Pré-definições do pack cliente (ex.: Fligenio · Genius Raros Lda) — ver NH_CLIENT_GENIUS_RAROS_DEFAULTS */
 function applyNhalabeneClientPackDefaults() {
   if (typeof NH_CLIENT_GENIUS_RAROS_DEFAULTS === 'undefined' || !NH_CLIENT_GENIUS_RAROS_DEFAULTS) return;
   const p = (typeof NH_CLIENT_GENIUS_RAROS_PROFILE === 'object' && NH_CLIENT_GENIUS_RAROS_PROFILE) ? NH_CLIENT_GENIUS_RAROS_PROFILE : {};
   const nome = String(p.empresa || '').trim();
   const sigla = String(p.sigla || '').trim();
-  const logo = String(p.logoRelPath || '').trim();
+  const paths = getLocalBrandLogoCandidates();
+  const logo = paths[0] || '';
   const curNome = ls('nhalabene_empresa_nome');
   const curSigla = ls('nhalabene_empresa_sigla');
   const curLogo = ls('nhalabene_empresa_logo');
@@ -3398,9 +3442,23 @@ function loadCfg() {
   const sEl = document.getElementById('cfg-empresa-sigla');
   if (nEl) nEl.value = savedNome;
   if (sEl) sEl.value = savedSigla;
-  if (savedNome || savedLogo) applyEmpresaToUI(savedNome || 'NHALABENE', savedSigla, savedLogo);
-  syncEmpresaFromSheets();
-  if (ST.token && ST.apiUrl) loadCfgContab();
+  const nomeUi = savedNome || 'NHALABENE';
+  const cands = getLocalBrandLogoCandidates();
+  const finishEmpresaLocal = logoResolved => {
+    const use = String(logoResolved || '').trim();
+    const finalLogo = use || savedLogo;
+    if (finalLogo && finalLogo !== savedLogo && shouldProbeLocalBrandLogo(savedLogo)) {
+      try { ls('nhalabene_empresa_logo', finalLogo); } catch (e) {}
+    }
+    applyEmpresaToUI(nomeUi, savedSigla, finalLogo);
+    syncEmpresaFromSheets();
+    if (ST.token && ST.apiUrl) loadCfgContab();
+  };
+  if (shouldProbeLocalBrandLogo(savedLogo)) {
+    preflightLocalLogoChain(cands, savedLogo, finishEmpresaLocal);
+  } else {
+    finishEmpresaLocal(savedLogo);
+  }
 }
 
 // ════════════════════════════════════════════════════════════════
